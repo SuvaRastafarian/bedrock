@@ -5,7 +5,13 @@
 {% extends "firefox/base-resp.html" %}
 
 {% block page_title_prefix %}{% endblock %}
-{% block page_title %}{{ _('Firefox — Desktop browser, Android, OS, Hello, Sync, Marketplace') }}{% endblock %}
+{% block page_title %}
+{% if l10n_has_tag('tracking_protection') and waffle.switch('firefox-ios-global') %}
+  {{ _('Firefox – Desktop browser, Android, iOS, OS, Hello, Sync, Private Browsing') }}
+{% else %}
+  {{ _('Firefox — Desktop browser, Android, OS, Hello, Sync, Marketplace') }}
+{% endif %}
+{% endblock %}
 {% block page_desc %}{{ _('Learn more about our complete lineup of products for desktop and mobile browsing (and more) that help keep you in control online. Free yourself with Firefox.') }}{% endblock %}
 
 {% block page_css %}
@@ -44,7 +50,11 @@
         <a rel="external" href="{{ settings.GOOGLE_PLAY_FIREFOX_LINK }}" data-product="Firefox for Android">{{ _('Get Firefox for Android') }}</a>
       </div>
       <div class="message" id="dlbar-ios">
+      {% if l10n_has_tag('tracking_protection') and waffle.switch('firefox-ios-global') %}
+        <a rel="external" href="{{ settings.APPLE_APPSTORE_FIREFOX_LINK }}" data-product="Firefox for iOS">{{ _('Get Firefox for iOS') }}</a>
+      {% else %}
         {{ _('Firefox is coming soon to iOS! <a href="%s">Sign up to learn more</a>.')|format(url('newsletter.ios')) }}
+      {% endif %}
       </div>
 
       <button type="button" class="btn-close button-flat" title="{{ _('Close') }}">{{ _('Close') }}</button>
@@ -77,7 +87,7 @@
   </div>{#-- /.content --#}
 </header>{#-- /#header --#}
 
-<section id="products-primary">
+<section id="products-primary" {% if l10n_has_tag('tracking_protection') and waffle.switch('firefox-ios-global') %}class="ios-active"{% endif %}>
   <div class="content">
     <ul class="product-list">
       <li class="product" id="product-desktop">
@@ -88,7 +98,7 @@
         </a>
       </li>
 
-      <li class="product highlight" id="product-android">
+      <li class="product" id="product-android">
         <a href="{{ url('firefox.android.index') }}" data-product="Firefox for Android">
           {# L10n: span below adds visual style to "for" text #}
           <h2>{{ _('Firefox <span>for</span> Android') }}</h2>
@@ -104,6 +114,21 @@
           </small>
         <div>
       </li>
+
+    {% if l10n_has_tag('tracking_protection') and waffle.switch('firefox-ios-global') %}
+      <li class="product highlight" id="product-ios">
+        <a href="{{ url('firefox.ios') }}" data-product="Firefox for iOS">
+          {# L10n: <span> tag below adds visual style to "for" text #}
+          <h2>{{ _('Firefox <span>for</span> iOS') }}</h2>
+          <p>{{ _('Get it on iPhones and iPads') }}</p>
+        </a>
+
+        <a rel="external" href="{{ settings.APPLE_APPSTORE_FIREFOX_LINK }}" class="btn-apple-appstore" data-product="Firefox for iOS, App Store">
+          <img src="{{ l10n_img('firefox/ios/btn-apple-appstore.svg') }}" alt="{{ _('Download on the App Store') }}" width="135" height="40">
+        </a>
+      </li>
+    {% endif %}
+
       <li class="product" id="product-fxos">
         <a href="{{ url('firefox.os.index') }}" data-product="Firefox OS">
           <h2>{{ _('Firefox OS') }}</h2>
@@ -131,12 +156,21 @@
         </a>
       </li>
 
+    {% if l10n_has_tag('tracking_protection') and waffle.switch('tracking-protection') %}
+      <li class="product" id="product-private-browsing">
+        <a href="#TODO" data-product="Private Browsing">
+          <h2>{{ _('Private Browsing') }}</h2>
+          <p>{{ _('Now with Tracking Protection.') }}</p>
+        </a>
+      </li>
+    {% else %}
       <li class="product" id="product-marketplace">
         <a rel="external" href="https://marketplace.firefox.com/" data-product="Firefox Marketplace">
           <h2>{{ _('Firefox Marketplace') }}</h2>
           <p>{{ _('Discover and download Web apps.') }}</p>
         </a>
       </li>
+    {% endif %}
     </ul>
   </div>{#-- /.content --#}
 </section>{#-- /#products-secondary --#}
