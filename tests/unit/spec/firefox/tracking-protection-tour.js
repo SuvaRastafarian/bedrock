@@ -50,6 +50,7 @@ describe('tracking-protection-tour.js', function() {
     afterEach(function() {
         clock.restore();
         Mozilla.TPTour.state = 'step1';
+        Mozilla.TPTour.panelVisible = false;
     });
 
     describe('init', function() {
@@ -247,7 +248,38 @@ describe('tracking-protection-tour.js', function() {
             expect($.fn.on).toHaveBeenCalledWith('click.tp-tour', Mozilla.TPTour.step3);
             expect($.fn.on).toHaveBeenCalledWith('click.tp-tour', Mozilla.TPTour.step4);
             expect($.fn.on).toHaveBeenCalledWith('visibilitychange.tp-tour', Mozilla.TPTour.handleVisibilityChange);
+            expect($.fn.on).toHaveBeenCalledWith('resize.tp-tour', Mozilla.TPTour.handleResize);
             expect($.fn.on).toHaveBeenCalledWith('click.tp-tour', Mozilla.TPTour.restartTour);
+        });
+    });
+
+    describe('handleResize', function() {
+
+        beforeEach(function() {
+            spyOn(Mozilla.UITour, 'hideInfo');
+            spyOn(Mozilla.TPTour, 'showTourStep');
+        });
+
+        it('should hide info panels if on tour step 1', function() {
+            Mozilla.TPTour.panelVisible = true;
+            Mozilla.TPTour.handleResize();
+            expect(Mozilla.UITour.hideInfo).toHaveBeenCalled();
+            expect(Mozilla.TPTour.panelVisible).toBeFalsy();
+            clock.tick(400);
+            expect(Mozilla.TPTour.showTourStep).toHaveBeenCalled();
+        });
+
+        it('should not hide info panels on other steps', function() {
+            Mozilla.TPTour.state = 'step2';
+            Mozilla.TPTour.handleResize();
+            expect(Mozilla.UITour.hideInfo).not.toHaveBeenCalled();
+        });
+
+        it('should not hide info panel if not visible', function() {
+            Mozilla.TPTour.state = 'step1';
+            Mozilla.TPTour.panelVisible = false;
+            Mozilla.TPTour.handleResize();
+            expect(Mozilla.UITour.hideInfo).not.toHaveBeenCalled();
         });
     });
 

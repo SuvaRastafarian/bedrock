@@ -19,8 +19,11 @@ if (typeof Mozilla === 'undefined') {
     var _step1;
     var _step3;
     var _highlightTimeout;
+    var _resizeTimeout;
 
     TPTour.state = 'step1';
+
+    TPTour.panelVisible = false;
 
     // Used for unit testing purposes only as "document.hidden" is read only.
     TPTour.documentHidden = null;
@@ -45,6 +48,7 @@ if (typeof Mozilla === 'undefined') {
         Mozilla.UITour.getConfiguration('availableTargets', function(config) {
             if (config.targets && config.targets.indexOf('trackingProtection') !== -1) {
                 Mozilla.UITour.showInfo('trackingProtection', _step1.titleText, _step1.panelText, undefined, buttons, options);
+                TPTour.panelVisible = true;
             }
         });
 
@@ -138,6 +142,19 @@ if (typeof Mozilla === 'undefined') {
         $('#info-panel header > button').on('click.tp-tour', TPTour.step4);
         $(document).on('visibilitychange.tp-tour', TPTour.handleVisibilityChange);
         $('#reload-btn').on('click.tp-tour', TPTour.restartTour);
+        $(window).on('resize.tp-tour', TPTour.handleResize);
+    };
+
+    /**
+     * Tempoaray workaround for resizing the window (Bug 1188400)
+     */
+    TPTour.handleResize = function() {
+        if (TPTour.state === 'step1' && TPTour.panelVisible) {
+            clearTimeout(_resizeTimeout);
+            Mozilla.UITour.hideInfo();
+            TPTour.panelVisible = false;
+            _resizeTimeout = setTimeout(TPTour.showTourStep, 300);
+        }
     };
 
     TPTour.handleVisibilityChange = function() {
