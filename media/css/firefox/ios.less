@@ -157,7 +157,6 @@ a.go {
         }
     }
 
-
     h1 {
         .font-size(82px);
         clear: both;
@@ -430,7 +429,7 @@ a.go {
     list-style: none;
     margin: 20px auto 40px;
     text-align: center;
-    width: (@gridColumnWidth * 9) + (@gridGutterWidth * 9);
+    .flexbox;
 
     @media only screen and (max-width: @breakTablet) {
         display: block;
@@ -438,10 +437,10 @@ a.go {
     }
 
     li {
-        .span(3);
+        width: 20%;
         .font-size(22px);
         position: relative;
-        padding-top: 160px;
+        padding: 160px 10px 0;
 
         &:before {
             content: '';
@@ -468,11 +467,16 @@ a.go {
             background-position: -142px 0;
         }
 
-        @media only screen and (max-width: @breakTablet) {
-            width: auto;
-            float: none;
+        &.sync-bookmarks:before {
+            background-position: -142px -142px;
+        }
+
+        &.sync-reading-list:before {
+            background-position: 0 -284px;
+        }
+
+        @media only screen and (max-width: @breakDesktop) {
             padding-top: 140px;
-            margin: 0 auto 1em;
             .font-size(18px);
 
             &:before {
@@ -493,6 +497,20 @@ a.go {
             &.sync-tabs:before {
                 background-position: -120px 0;
             }
+
+            &.sync-bookmarks:before {
+                background-position: -122px -121px;
+            }
+
+            &.sync-reading-list:before {
+                background-position: 0 -242px;
+            }
+        }
+
+        @media only screen and (max-width: @breakTablet) {
+            width: auto;
+            float: none;
+            margin: 0 auto 1em;
         }
     }
 }
@@ -540,6 +558,109 @@ a.go {
     }
 }
 
+
+// Privacy
+.section-privacy {
+    background: #005189;
+    color: #fff;
+    padding: 80px 0 40px;
+
+    h2 {
+        .font-size(48px);
+        line-height: 1.2;
+        text-shadow: none;
+        text-align: center;
+        margin: 0 auto 16px;
+        color: #fff;
+
+        @media (max-width: @breakDesktop) and (min-width: (@breakTablet + 1)) {
+            .font-size(40px);
+        }
+
+        @media only screen and (max-width: @breakTablet) {
+            .font-size(30px);
+        }
+    }
+
+    .lead {
+        .open-sans-light();
+        .font-size(24px);
+        line-height: 1.4;
+        text-align: center;
+        margin: 0 auto 80px;
+
+        @media (max-width: @breakDesktop) and (min-width: (@breakTablet + 1)) {
+            .font-size(22px);
+        }
+
+        @media only screen and (max-width: @breakTablet) {
+            .font-size(20px);
+            margin-bottom: 40px;
+        }
+    }
+
+    ul {
+        width: 720px;
+        margin: 0 auto;
+
+        @media only screen and (max-width: @breakTablet) {
+            width: auto;
+        }
+    }
+
+    li {
+        float: left;
+        list-style-type: none;
+        margin: 0 10px 50px;
+        width: 300px;
+        padding: 170px @gridGutterWidth 0;
+        text-align: center;
+        position: relative;
+
+        &:before {
+            content: '';
+            display: block;
+            width: 142px;
+            height: 142px;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            margin-left: -71px;
+            .at2x('/media/img/firefox/android/sprite-privacy.png', 1200px, 142px);
+            background-repeat: no-repeat;
+        }
+
+        @media only screen and (max-width: @breakTablet) {
+            float: none;
+            padding: 170px 0 0;
+            margin: 0 auto 50px;
+        }
+
+        h3 {
+            text-transform: uppercase;
+            font-weight: normal;
+            .font-size(18px);
+            text-shadow: none;
+            color: #fff;
+        }
+
+        a:link,
+        a:visited,
+        a:hover,
+        a:focus {
+            color: #71c4ea;
+            .trailing-arrow;
+        }
+    }
+
+    #private-browsing:before {
+        background-position: -300px 0;
+    }
+
+    #clear-history:before {
+        background-position: -600px 0;
+    }
+}
 
 
 // Send to Device Widget
