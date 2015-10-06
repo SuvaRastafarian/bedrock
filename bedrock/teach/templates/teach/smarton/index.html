@@ -1,0 +1,55 @@
+{# This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/. -#}
+
+{% extends "teach/smarton/base.html" %}
+
+{% block page_title %}{{_('Get smart on the Web')}}{% endblock %}
+{% block page_desc %}{{_('Get smart on the Web')}}{% endblock %}
+{% block body_id %}smarton-landing{% endblock %}
+{% block body_class %}smarton landing{% endblock %}
+
+{% block smarton_content %}
+<main role="main" class="section">
+  <div class="content">
+
+    <ul class="smarton-topics">
+      <li class="topic-tracking">
+        <a href="{{ url('teach.smarton.tracking') }}">
+          <h2 class="topic-title">{{ _('Tracking') }}</h2>
+          <h3><del>{{ _('Follow me') }}</del></h3>
+          <p>{{ _('What you do online is your business, and you can keep it that way.') }}</p>
+        </a>
+      </li>
+
+      <li class="topic-security">
+        <a href="{{ url('teach.smarton.security') }}">
+          <h2 class="topic-title">{{ _('Cyber security') }}</h2>
+          <h3>{{ _('Lock it down') }}</h3>
+          <p>{{ _('Look both ways, stay updated, and make sure your passwords are as buff as you are.') }}</p>
+        </a>
+      </li>
+
+      <li class="topic-surveillance">
+        <a href="{{ url('teach.smarton.surveillance') }}">
+          <h2 class="topic-title">{{ _('Government surveillance') }}</h2>
+          <h3>{{ _('Take a stand') }}</h3>
+          <p>{{ _('Decide where you think the line should be – and keep others from crossing it.') }}</p>
+        </a>
+      </li>
+    </ul>
+
+    <aside class="series-description">
+      <h2>{{ _('Smarter by the step') }}</h2>
+      <ol class="smarton-steps">
+        <li>{{ _('Ask') }}</li>
+        <li>{{ _('Know') }}</li>
+        <li>{{ _('Do') }}</li>
+        <li>{{ _('Chat') }}</li>
+      </ol>
+      <p>{{ _('Ask yourself what you think, find out what you don’t know, take control of your experience. Then talk it out with your friends.') }}</p>
+    </aside>
+
+  </div>
+</main>
+{% endblock %}
