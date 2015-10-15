@@ -253,12 +253,18 @@
         float: left;
         margin: 0;
         text-shadow: none;
+        text-align: left;
+        width: 60%;
     }
-    .firefox-latest {
+    .download-buttons {
+        float: none;
+        width: 100%;
+    }
+    .button-flat-dark,
+    .dl-button,
+    .desktop-download-button,
+    .ios-download-button a {
         float: right;
-        button {
-            margin: 0;
-        }
     }
 }
 
@@ -390,10 +396,18 @@ html[lang^='en'] {
             .font-size(30px);
             float: none;
             margin-bottom: @baseLine;
+            text-align: center;
+            width: 100%;
         }
-        .firefox-latest {
+        .download-buttons {
             float: none;
             text-align: center;
+        }
+        .button-flat-dark,
+        .android-download-button a,
+        .desktop-download-button,
+        .ios-download-button a {
+            float: none;
         }
     }
 }
