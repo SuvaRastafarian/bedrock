@@ -1,0 +1,84 @@
+{# This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/. -#}
+
+{% from "macros.html" import share_cta with context %}
+
+{% extends "base-resp.html" %}
+
+{% add_lang_files "teach/smarton/index" %}
+
+{% block page_css %}
+  {% stylesheet 'smarton' %}
+{% endblock %}
+
+{% block site_header %}{% endblock %}
+
+{% block content %}
+
+  {% block smarton_header %}
+  <header class="masthead">
+    <div class="content">
+      {# L10n: <b> element below is for visual formatting, to distinguish the Smart On name from the rest of the text #}
+      <h1 class="series-title">{{ _('Get <b>Smart On</b> the Web') }}</h1>
+      <p class="series-intro">
+        {{ _('The SmartOn Series is like your Internet owner’s manual: the place to learn the most useful intel and tips from Mozilla policy peeps and programmers.') }}
+      </p>
+
+      <div id="tabzilla">
+        <a href="{{ url('mozorg.home') }}">Mozilla</a>
+      </div>
+    </div>
+  </header>
+  {% endblock %}
+
+  {% block smarton_content %}{% endblock %}
+
+  <div class="footer-cta" id="footer-cta">
+    <div class="foot-newsletter content">
+      {% if LANG == 'en-US' %}
+        {{ mozorg_newsletter_form(title=_('Stay in control'), subtitle=_('Get tips and more from Mozilla')) }}
+      {% else %}
+        {{ email_newsletter_form() }}
+      {% endif %}
+    </div>
+
+    <div class="foot-download content">
+      <h3 class="title">{{ _('Take back control') }}</h3>
+      {{ download_firefox(small=true) }}
+      <p class="tagline">{{ _('The non-profit browser by Mozilla') }}</p>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block email_form %}{% endblock %}
+
+{% block js %}
+  {% javascript 'smarton' %}
+{% endblock %}
+
+{% macro smarton_navbar(title='', share_text='', share_url='') -%}
+<header class="smarton-header">
+  <div class="content">
+  {%- if title -%}
+    <h1 class="smarton-title">{{ title }}</h1>
+  {%- endif -%}
+
+    {% set share_urls = { 'twitter': share_url, 'googleplus': share_url, 'facebook': share_url } -%}
+    {% set cta_text = _('Share') %}
+    {{ share_cta(cta_text, share_urls, share_text, 'head-share', 'mini') }}
+
+    <nav class="nav-steps">
+      {# L10n: <b> elements below are for visual formatting, to distinguish the numeral from the text label #}
+      <ol>
+        <li id="nav-step-ask"><a href="#ask">{{ _('<b>1.</b> Ask') }}</a></li>
+        <li id="nav-step-know"><a href="#know">{{ _('<b>2.</b> Know') }}</a></li>
+        <li id="nav-step-do"><a href="#do">{{ _('<b>3.</b> Do') }}</a></li>
+        <li id="nav-step-chat"><a href="#chat">{{ _('<b>4.</b> Chat') }}</a></li>
+      </ol>
+    </nav>
+
+  </div>
+</header>
+{%- endmacro %}
