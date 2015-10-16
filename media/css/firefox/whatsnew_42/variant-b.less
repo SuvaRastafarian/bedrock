@@ -78,7 +78,7 @@ main > header {
                 width: 8px;
                 height: 8px;
                 border-radius: 100%;
-                background-color: #ff5b94;
+                background-color: #ff397e;
                 opacity: 0;
                 content: '';
                 .animation(recorder 10s linear infinite);
@@ -119,7 +119,7 @@ main > header {
                 .at2x('/media/img/firefox/whatsnew_42/eye-bottom-right.png', 32px, 32px);
                 opacity: 0;
                 content: '';
-                .animation(blink 7s linear infinite);
+                .animation(blink 9s linear infinite);
             }
 
             // flashing light
@@ -130,7 +130,7 @@ main > header {
                 width: 4px;
                 height: 4px;
                 border-radius: 100%;
-                background-color: #ff5b94;
+                background-color: #ff397e;
                 opacity: 0;
                 content: '';
                 .animation(recorder 4s linear infinite);
@@ -349,6 +349,18 @@ main > header {
     46% {
         opacity: 0;
     }
+    75% {
+        opacity: 0;
+    }
+    76% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    81% {
+        opacity: 0;
+    }
     100% {
         opacity: 0;
     }
@@ -368,6 +380,18 @@ main > header {
         opacity: 1;
     }
     46% {
+        opacity: 0;
+    }
+    75% {
+        opacity: 0;
+    }
+    76% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    81% {
         opacity: 0;
     }
     100% {
