@@ -31,7 +31,7 @@
         {% include 'firefox/includes/tracking-protection-animation.html' %}
       </div>
       <div class="download-buttons">
-        <div class="firefox-up-to-date">
+        <div class="firefox-latest-button">
           <a href="https://www.mozilla.org" class="button-flat-dark" data-highlight="privateWindow" role="button"> Try Private Browsing </a>
         </div>
         <div class="non-firefox-button">
@@ -72,7 +72,12 @@
         <p>{{ _('Minimize the ability of hidden third parties from tracking your browsing activity across many sites.') }}</p>
       </div>
       <p class="footer">
-        <strong><a href="#TODO">{{ _('Learn more about Private Browsing') }}</a></strong>
+        <strong>
+          <a class="android-link" href="https://support.mozilla.org/en-US/kb/private-browsing-firefox-android">{{ _('Learn more about Private Browsing') }}</a>
+          <a class="ios-link" href="https://support.mozilla.org/kb/private-browsing-firefox-ios
+">{{ _('Learn more about Private Browsing') }}</a>
+          <a class="desktop-link" href="https://support.mozilla.org/en-US/kb/private-browsing-use-firefox-without-history">{{ _('Learn more about Private Browsing') }}</a>
+        </strong>
         <small id="tracking-protection-caveat"><sup aria-hidden="true">*</sup> {{ _('Tracking Protection is only available with Firefox for Android and Desktop') }}</small>
       </p>
 

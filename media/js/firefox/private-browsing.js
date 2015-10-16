@@ -12,7 +12,7 @@
 
     if (window.isFirefox()) {
         if (window.isFirefoxUpToDate()) {
-            $html.addClass('firefox-latest');
+            $html.addClass('firefox-up-to-date');
             $('.button-flat-dark').on('highlight-target', function() {
                 $shield.addClass('blocked');
             });
